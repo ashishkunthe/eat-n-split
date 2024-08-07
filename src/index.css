@@ -1,8 +1,9 @@
 :root {
-  --color-lightest: #fff4e6;
-  --color-light: #ffe8cc;
-  --color-medium: #ffa94d;
-  --color-dark: #ff922b;
+  --color-lightest: #2c3e50;
+  --color-light: #34495e;
+  --color-medium: #2980b9;
+  --color-dark: #2c3e50;
+  --color-text: #ffffff;
 }
 
 * {
@@ -19,10 +20,62 @@ html {
 
 body {
   height: 100vh;
-  color: #495057;
+  color: var(--color-text);
+  background: linear-gradient(
+    135deg,
+    var(--color-dark) 0%,
+    var(--color-light) 100%
+  );
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.confetti {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.7);
+  animation: fall 5s linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotateZ(360deg);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+}
+
+.confetti-piece:nth-child(2n) {
+  background-color: rgba(255, 255, 255, 0.9);
+  animation: fall 6s linear infinite;
+}
+
+.confetti-piece:nth-child(3n) {
+  background-color: rgba(255, 255, 255, 0.5);
+  animation: fall 7s linear infinite;
 }
 
 .app {
@@ -31,11 +84,12 @@ body {
   grid-template-columns: 34rem 44rem;
   column-gap: 4rem;
   align-items: start;
+  z-index: 2;
 }
 
 .button {
-  background-color: var(--color-medium);
-  color: #343a40;
+  background-color: #34495e;
+  color: var(--color-text);
   padding: 0.8rem 1.2rem;
   border: none;
   border-radius: 7px;
@@ -66,6 +120,8 @@ body {
   padding: 1.2rem;
   border-radius: 7px;
   transition: 0.5s;
+  border: 2px solid rgb(105, 105, 107);
+  border-radius: 25px;
 }
 
 .selected,
@@ -113,18 +169,21 @@ form {
   align-items: center;
   gap: 1.2rem;
 
-  background-color: var(--color-lightest);
-  border-radius: 7px;
+  background-color: transparent;
+  border-radius: 25px;
+  border: 2px solid rgb(77, 77, 80);
 }
 
 .form-add-friend {
   grid-template-columns: 1fr 1.5fr;
   margin-bottom: 1.6rem;
   padding: 1.2rem;
+  color: rgb(157, 158, 158);
 }
 .form-split-bill {
   grid-template-columns: 1fr 12rem;
   padding: 3.2rem 4rem;
+  color: #a3a3a3;
 }
 
 label {
@@ -166,4 +225,15 @@ form h2 {
   text-transform: uppercase;
   letter-spacing: -0.5px;
   margin-bottom: 1.6rem;
+}
+.header {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #4a4d50;
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 2px solid var(--color-dark);
+  border-radius: 25px;
+  margin-bottom: 10px;
 }
